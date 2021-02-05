@@ -35,6 +35,9 @@ function WebcamCapture() {
         onClick={capture}
         fontSize="large"
       />
+      <div>
+        <h1>test</h1>
+      </div>
     </div>
   );
 }
