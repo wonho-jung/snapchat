@@ -27,16 +27,19 @@ function Preview() {
       history.replace("/");
     }
   }, [cameraImage, history]);
+
   const closePreview = () => {
     dispatch(resetCameraImage());
   };
+
   const sendPost = () => {
     const id = uuid();
     const uploadTask = storage
       .ref(`posts/${id}`)
       .putString(cameraImage, "data_url");
+
     uploadTask.on(
-      "state)changed",
+      "state_changed",
       null,
       (error) => {
         console.log(error);
@@ -49,9 +52,9 @@ function Preview() {
           .then((url) => {
             db.collection("posts").add({
               imageUrl: url,
-              username: "won",
+              username: "test11",
               read: false,
-              timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
             history.replace("/chats");
           });
