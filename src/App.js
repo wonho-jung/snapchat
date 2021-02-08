@@ -31,29 +31,38 @@ function App() {
   }, []);
   return (
     <div className="app">
-      <div className="app__body">
-        <Router>
-          {!user ? (
-            <Login />
-          ) : (
-            <Switch>
-              <Route path="/chats/view">
-                <ChatView />
-              </Route>
+      <Router>
+        {!user ? (
+          <Login />
+        ) : (
+          <>
+            <img
+              className="app__logo"
+              src="https://cdn.worldvectorlogo.com/logos/snapchat-1.svg"
+            />
 
-              <Route path="/chats">
-                <Chats />
-              </Route>
-              <Route path="/preview">
-                <Preview />
-              </Route>
-              <Route exact path="/">
-                <WebcamCapture />
-              </Route>
-            </Switch>
-          )}
-        </Router>
-      </div>
+            <div className="app__body">
+              <div className="app__bodyBackground">
+                <Switch>
+                  <Route path="/chats/view">
+                    <ChatView />
+                  </Route>
+
+                  <Route path="/chats">
+                    <Chats />
+                  </Route>
+                  <Route path="/preview">
+                    <Preview />
+                  </Route>
+                  <Route exact path="/">
+                    <WebcamCapture />
+                  </Route>
+                </Switch>
+              </div>
+            </div>
+          </>
+        )}
+      </Router>
     </div>
   );
 }

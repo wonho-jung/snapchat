@@ -18,10 +18,12 @@ import { v4 as uuid } from "uuid";
 import "./Preview.css";
 import { db, storage } from "../../firebase";
 import firebase from "firebase";
+import { selectUser } from "../../features/appSlice";
 function Preview() {
   const cameraImage = useSelector(selectcameraImage);
   const history = useHistory();
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   useEffect(() => {
     if (!cameraImage) {
       history.replace("/");
@@ -51,8 +53,9 @@ function Preview() {
           .getDownloadURL()
           .then((url) => {
             db.collection("posts").add({
+              profilePic: user.profilePic,
               imageUrl: url,
-              username: "test11",
+              username: user.username,
               read: false,
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
